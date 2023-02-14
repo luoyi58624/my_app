@@ -23,7 +23,7 @@ void main() {
         useMaterial3: true,
         colorScheme: darkColorScheme,
       ),
-      // routes: router,
+      routes: router,
       home: const App(),
     ),
   );

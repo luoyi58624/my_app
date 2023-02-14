@@ -13,15 +13,24 @@ class _ImState extends State<Im> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('聊天')),
-      body: Center(
-          child: ElevatedButton(
-        onPressed: () {
-          setState(() {
-            count++;
-          });
-        },
-        child: Text('count: $count'),
-      )),
+      body: SizedBox.expand(
+        child: ListView.builder(
+          itemCount: 50,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/list-item');
+                  // Navigator.push(
+                  //     MaterialPageRoute(builder: (context) => ListItem()));
+                },
+                child: Text('Push /text [${index + 1}]'),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
