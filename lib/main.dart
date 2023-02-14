@@ -1,4 +1,14 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_app/pages/list_item.dart';
+import 'package:my_app/router/router.dart';
+import 'package:my_app/tabbar/home.dart';
+import 'package:my_app/tabbar/im.dart';
+import 'package:my_app/tabbar/my.dart';
+import 'package:my_app/tabbar/project.dart';
+import 'package:my_app/tabbar/tool.dart';
 import 'color_schemes.dart';
 
 void main() {
@@ -13,6 +23,7 @@ void main() {
         useMaterial3: true,
         colorScheme: darkColorScheme,
       ),
+      // routes: router,
       home: const App(),
     ),
   );
@@ -25,34 +36,17 @@ class App extends StatefulWidget {
   State<App> createState() => AppState();
 }
 
-class AppState extends State<App> {
+class AppState extends State<App> with SingleTickerProviderStateMixin {
   int count = 0;
 
   int tabIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    ElevatedButton(
-      onPressed: null,
-      child: Text('hello'),
-    ),
-    Text(
-      'Index 2',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 4',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 5',
-      style: optionStyle,
-    ),
-  ];
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: tabIndex);
+  }
 
   void switchTab(int index) {
     setState(() {
@@ -63,15 +57,90 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: _widgetOptions.elementAt(tabIndex),
+      body: SafeArea(
+        top: false,
+        child: buildStackBody(),
       ),
-      bottomNavigationBar: material3Navbar(),
+      bottomNavigationBar: buildMaterial2Tabbar(),
     );
   }
 
-  Widget material2Navbar() {
+  final homeKey = GlobalKey<NavigatorState>();
+  final toolKey = GlobalKey<NavigatorState>();
+  final projectKey = GlobalKey<NavigatorState>();
+  Widget buildTabbarPage(page, key) {
+    return Navigator(
+      key: key,
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) {
+            switch (settings.name) {
+              case '/':
+                return page;
+              case '/list-item':
+                return const ListItem();
+            }
+            // assert(false);
+            return const SizedBox();
+          },
+        );
+      },
+    );
+  }
+
+  Widget buildStackBody() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Offstage(
+            offstage: tabIndex != 0,
+            child: buildTabbarPage(const Home(), homeKey)),
+        Offstage(
+            offstage: tabIndex != 1,
+            child: buildTabbarPage(const Tool(), toolKey)),
+        Offstage(
+            offstage: tabIndex != 2,
+            child: buildTabbarPage(const Project(), projectKey)),
+        Offstage(offstage: tabIndex != 3, child: const Im()),
+        Offstage(offstage: tabIndex != 4, child: const My())
+      ],
+    );
+  }
+
+  Widget buildIndexStackBody() {
+    return IndexedStack(
+      index: tabIndex,
+      children: const [
+        Home(),
+        Tool(),
+        Project(),
+        Im(),
+        My(),
+      ],
+    );
+  }
+
+  Widget buildPageViewBody() {
+    return PageView(
+      controller: pageController,
+      scrollDirection: Axis.horizontal,
+      children: const [
+        Home(),
+        Tool(),
+        Project(),
+        Im(),
+        My(),
+      ],
+      onPageChanged: (index) {
+        setState(() {
+          tabIndex = index;
+        });
+      },
+    );
+  }
+
+  Widget buildMaterial2Tabbar() {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -101,7 +170,7 @@ class AppState extends State<App> {
     );
   }
 
-  Widget material3Navbar() {
+  Widget buildMaterial3Tabbar() {
     return NavigationBar(
       onDestinationSelected: (int index) {
         setState(() {
@@ -111,17 +180,24 @@ class AppState extends State<App> {
       selectedIndex: tabIndex,
       destinations: const <Widget>[
         NavigationDestination(
-          icon: Icon(Icons.explore),
-          label: 'Explore',
+          icon: Icon(Icons.home),
+          label: '首页',
         ),
         NavigationDestination(
-          icon: Icon(Icons.commute),
-          label: 'Commute',
+          icon: Icon(Icons.widgets),
+          label: '工具',
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.bookmark),
-          icon: Icon(Icons.bookmark_border),
-          label: 'Saved',
+          icon: Icon(Icons.school),
+          label: '项目圈',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.chat),
+          label: '消息',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.person),
+          label: '我的',
         ),
       ],
     );
