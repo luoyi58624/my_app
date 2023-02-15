@@ -8,11 +8,32 @@ class ToolPage extends StatefulWidget {
 }
 
 class _ToolPagePageState extends State<ToolPage> {
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('工具')),
-      body: const Center(child: Text('工具页面')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/task/list');
+              },
+              child: const Text('跳转嵌套子页面'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  count++;
+                });
+              },
+              child: Text('count: $count'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

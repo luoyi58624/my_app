@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProjectListPage extends StatefulWidget {
-  const ProjectListPage({super.key});
+class TaskListPage extends StatefulWidget {
+  const TaskListPage({super.key});
 
   @override
-  State<ProjectListPage> createState() => _ProjectListPageState();
+  State<TaskListPage> createState() => _TaskListPageState();
 }
 
-class _ProjectListPageState extends State<ProjectListPage> {
+class _TaskListPageState extends State<TaskListPage> {
   List dataList = [];
   @override
   void initState() {
@@ -20,18 +20,18 @@ class _ProjectListPageState extends State<ProjectListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('项目列表')),
+      appBar: AppBar(title: const Text('任务列表')),
       body: ListView.builder(
-        itemCount: 50,
+        itemCount: 1000000,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             child: OutlinedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/project/detail',
+                Navigator.pushNamed(context, '/task/detail',
                     arguments: ProjectDetailArguments(index + 1));
               },
-              child: Text('项目详情 -  [${index + 1}]'),
+              child: Text('任务详情 - [${index + 1}]'),
             ),
           );
         },
@@ -40,21 +40,21 @@ class _ProjectListPageState extends State<ProjectListPage> {
   }
 }
 
-class ProjectDetailPage extends StatefulWidget {
-  const ProjectDetailPage({super.key});
+class TaskDetailPage extends StatefulWidget {
+  const TaskDetailPage({super.key});
 
   @override
-  State<ProjectDetailPage> createState() => _ProjectDetailPageState();
+  State<TaskDetailPage> createState() => _TaskDetailPageState();
 }
 
-class _ProjectDetailPageState extends State<ProjectDetailPage> {
+class _TaskDetailPageState extends State<TaskDetailPage> {
   int count = 0;
   @override
   Widget build(BuildContext context) {
     var args =
         ModalRoute.of(context)!.settings.arguments as ProjectDetailArguments;
     return Scaffold(
-        appBar: AppBar(title: Text('项目详情${args.id}')),
+        appBar: AppBar(title: Text('任务详情${args.id}')),
         body: Center(
           child: TextButton(
             child: Text('count: $count'),

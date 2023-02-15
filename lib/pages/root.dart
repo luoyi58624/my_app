@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/base/task.dart';
 import 'tabbar/home.dart';
 import 'tabbar/im.dart';
 import 'tabbar/my.dart';
@@ -105,6 +106,10 @@ class _RootPageState extends State<RootPage> {
                 return const ProjectListPage();
               case '/project/detail':
                 return const ProjectDetailPage();
+              case '/task/list':
+                return const TaskListPage();
+              case '/task/detail':
+                return const TaskDetailPage();
             }
             // assert(false);
             return const SizedBox();
