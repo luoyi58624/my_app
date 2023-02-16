@@ -22,6 +22,12 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text('跳转嵌套子页面'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/nest/one');
+              },
+              child: const Text('跳转嵌套页面'),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/base/task.dart';
+import 'package:my_app/pages/test/material_widget/index.dart';
+import 'package:my_app/pages/test/my_widget/index.dart';
 import 'tabbar/home.dart';
 import 'tabbar/im.dart';
 import 'tabbar/my.dart';
@@ -111,8 +113,10 @@ class _RootPageState extends State<RootPage> {
                 return const TaskListPage();
               case '/task/detail':
                 return const TaskDetailPage();
-              case '/test/material_widget/list_view':
-                return const ListTileSelectExample();
+              case '/test/material_widget':
+                return MaterialWidgetPage();
+              case '/test/my_widget':
+                return MyWidgetPage();
             }
             // assert(false);
             return const SizedBox();

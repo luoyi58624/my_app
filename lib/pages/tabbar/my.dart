@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../model/widget_model.dart';
+
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
 
@@ -9,12 +11,8 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   List<CellModel> cellNames = [
-    CellModel('Material Widget Test', '/test/material_widget/list_view'),
-    CellModel('My Widget Test', '/test/material_widget/list_view'),
-    CellModel('My Widget Test', '/test/material_widget/list_view'),
-    CellModel('My Widget Test', '/test/material_widget/list_view'),
-    CellModel('My Widget Test', '/test/material_widget/list_view'),
-    CellModel('My Widget Test', '/test/material_widget/list_view'),
+    CellModel('Material Widget页面', '/test/material_widget'),
+    CellModel('My Widget页面', '/test/my_widget'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -63,11 +61,4 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
-}
-
-class CellModel {
-  final String name;
-  final String url;
-
-  CellModel(this.name, this.url);
 }
