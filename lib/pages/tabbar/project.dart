@@ -12,7 +12,10 @@ class _ProjectPageState extends State<ProjectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('项目圈')),
-      body: const Center(child: Text('项目圈页面')),
+      body: DecoratedBox(
+        child: Text('xxx'),
+        decoration: BoxDecoration(color: Colors.red),
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'tabbar/my.dart';
 import 'tabbar/project.dart';
 import 'tabbar/tool.dart';
 import 'base/project.dart';
+import 'test/material_widget/list_view.dart';
 
 // App根页面
 class RootPage extends StatefulWidget {
@@ -110,6 +111,8 @@ class _RootPageState extends State<RootPage> {
                 return const TaskListPage();
               case '/task/detail':
                 return const TaskDetailPage();
+              case '/test/material_widget/list_view':
+                return const ListTileSelectExample();
             }
             // assert(false);
             return const SizedBox();

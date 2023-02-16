@@ -22,7 +22,7 @@ class _TaskListPageState extends State<TaskListPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('任务列表')),
       body: ListView.builder(
-        itemCount: 1000000,
+        itemCount: 100,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
