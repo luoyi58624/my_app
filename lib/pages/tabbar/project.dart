@@ -12,8 +12,9 @@ class _ProjectPageState extends State<ProjectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('项目圈')),
-      body: DecoratedBox(
-        child: Text('xxx'),
+      body: Container(
+        child: Column(
+            mainAxisSize: MainAxisSize.min, children: [const Text('hello')]),
         decoration: BoxDecoration(color: Colors.red),
       ),
     );

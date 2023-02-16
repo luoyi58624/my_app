@@ -11,6 +11,10 @@ class _MyPageState extends State<MyPage> {
   List<CellModel> cellNames = [
     CellModel('Material Widget Test', '/test/material_widget/list_view'),
     CellModel('My Widget Test', '/test/material_widget/list_view'),
+    CellModel('My Widget Test', '/test/material_widget/list_view'),
+    CellModel('My Widget Test', '/test/material_widget/list_view'),
+    CellModel('My Widget Test', '/test/material_widget/list_view'),
+    CellModel('My Widget Test', '/test/material_widget/list_view'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -21,11 +25,12 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget buildCell() {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(8.0),
       child: Material(
         elevation: 4,
         child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: cellNames
                 .map((e) => ListTile(
                       title: Text(e.name),
