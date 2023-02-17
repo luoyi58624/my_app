@@ -372,6 +372,7 @@ class HomeMenu extends StatelessWidget {
           initialRoute: '/',
           onGenerateRoute: (RouteSettings settings) {
             WidgetBuilder builder;
+            debugPrint(settings.name);
             switch (settings.name) {
               case '/':
                 builder = (BuildContext _) => const HomeFeeds();
@@ -407,6 +408,7 @@ class ProductsMenu extends StatelessWidget {
           initialRoute: '/',
           onGenerateRoute: (RouteSettings settings) {
             WidgetBuilder builder;
+            debugPrint(settings.name);
             switch (settings.name) {
               case '/':
                 builder = (BuildContext _) => const ProductList();

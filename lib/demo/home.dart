@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/nest_route/one.dart';
 
 void main() {
-  runApp(const MaterialApp(home: Home()));
+  runApp(
+    MaterialApp(
+      routes: {
+        '/nest/one': (context) => const OnePage(),
+      },
+      home: const Home(),
+    ),
+  );
 }
 
 class Home extends StatefulWidget {
@@ -168,6 +176,29 @@ class RootPage extends StatelessWidget {
                 Navigator.pushNamed(context, '/list');
               },
               child: const Text('Push /list'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              style: buttonStyle,
+              onPressed: () {
+                // Navigator.pushNamed(context, '/nest/one');
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(
+                        builder: (context) => ListPage(
+                              destination: destination,
+                            )));
+              },
+              child: const Text('Root Push /list'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              style: buttonStyle,
+              onPressed: () {
+                // Navigator.pushNamed(context, '/nest/one');
+                Navigator.of(context, rootNavigator: true)
+                    .pushNamed('/nest/one');
+              },
+              child: const Text('One page'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
@@ -358,7 +389,7 @@ class _DestinationViewState extends State<DestinationView> {
               case '/text':
                 return TextPage(destination: widget.destination);
             }
-            assert(false);
+            // assert(false);
             return const SizedBox();
           },
         );

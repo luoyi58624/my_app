@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 class OnePage extends StatelessWidget {
   const OnePage({super.key});
@@ -15,12 +15,13 @@ class OnePage extends StatelessWidget {
             ElevatedButton(onPressed: () {}, child: const Text('下一页')),
             ElevatedButton(
                 onPressed: () {
-                  Get.back();
+                  Navigator.pop(context);
                 },
                 child: const Text('上一页')),
             ElevatedButton(
                 onPressed: () {
-                  Get.offAllNamed('/');
+                  // Navigator.
+                  // Get.offAllNamed('/');
                   // Get.back();
                 },
                 child: const Text('返回首页')),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/pages/base/task.dart';
 import 'package:my_app/pages/test/material_widget/index.dart';
 import 'package:my_app/pages/test/my_widget/index.dart';
+import 'package:my_app/router.dart';
 import 'tabbar/home.dart';
 import 'tabbar/im.dart';
 import 'tabbar/my.dart';
@@ -35,28 +36,16 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final NavigatorState navigator = tabbarKeys[tabIndex].currentState!;
-        if (!navigator.canPop()) {
-          return true;
-        }
-        navigator.pop();
-        return false;
-      },
-      child: Scaffold(
-        body: buildBody(),
-        bottomNavigationBar: buildMaterial2Tabbar(),
-      ),
+    return Scaffold(
+      body: buildBody(),
+      bottomNavigationBar: buildMaterial2Tabbar(),
     );
   }
 
   Widget buildBody() {
     return IndexedStack(
       index: tabIndex,
-      children: tabbarPages
-          .map((e) => buildNestRouter(e, tabbarKeys[e.index]))
-          .toList(),
+      children: tabbarPages.map((e) => e.page).toList(),
     );
   }
 
@@ -99,16 +88,20 @@ class _RootPageState extends State<RootPage> {
     return Navigator(
       key: key,
       onGenerateRoute: (settings) {
+        // nestRouter.forEach(
+        //   (key, value) {},
+        // );
         return MaterialPageRoute(
           settings: settings,
           builder: (context) {
+            debugPrint(settings.name);
             switch (settings.name) {
               case '/':
                 return tabbar.page;
               case '/project/list':
                 return const ProjectListPage();
-              case '/project/detail':
-                return const ProjectDetailPage();
+              // case '/project/detail':
+              //   return const ProjectDetailPage();
               case '/task/list':
                 return const TaskListPage();
               case '/task/detail':

@@ -28,8 +28,10 @@ class _ProjectListPageState extends State<ProjectListPage> {
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             child: OutlinedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/project/detail',
-                    arguments: ProjectDetailArguments(index + 1));
+                Navigator.of(context, rootNavigator: true).pushNamed(
+                  '/project/detail',
+                  arguments: ProjectDetailArguments(index + 1),
+                );
               },
               child: Text('项目详情 -  [${index + 1}]'),
             ),
